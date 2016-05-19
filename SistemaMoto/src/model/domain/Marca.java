@@ -1,5 +1,6 @@
 package model.domain;
 
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 @XmlRootElement
 @Entity
 @Table(name="TB_MARCA")
@@ -23,7 +25,7 @@ public class Marca implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CD_MARCA")
-	private Integer codMarca;
+	private Integer codigo;
 	
 	@Column(name = "NM_MARCA")
 	private String nome;
@@ -36,12 +38,12 @@ public class Marca implements Serializable {
 		
 	}
 
-	public Integer getCodMarca() {
-		return codMarca;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setCodMarca(Integer codMarca) {
-		this.codMarca = codMarca;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -65,7 +67,7 @@ public class Marca implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codMarca == null) ? 0 : codMarca.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 
@@ -78,10 +80,10 @@ public class Marca implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Marca other = (Marca) obj;
-		if (codMarca == null) {
-			if (other.codMarca != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!codMarca.equals(other.codMarca))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}

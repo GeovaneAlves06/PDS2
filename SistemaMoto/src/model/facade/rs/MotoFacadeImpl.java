@@ -41,7 +41,7 @@ public class MotoFacadeImpl implements MotoFacade {
 	@Path("/{codigo}")
 	public List<Moto> getMotos(@PathParam("codigo") Integer codigo) {
 		Moto moto= new Moto();
-		moto.setCodMoto(codigo);
+		moto.setCodigo(codigo);
 		return motoDao.getMotos(moto);
 	}
 	
@@ -72,7 +72,7 @@ public class MotoFacadeImpl implements MotoFacade {
 	@Path("/{codigo}")
 	public void deletarMoto(@PathParam("codigo") Integer codigo) {
 		Moto moto = new Moto();
-		moto.setCodMoto(codigo);
+		moto.setCodigo(codigo);
 		motoDao.excluir(moto);
 	}
 

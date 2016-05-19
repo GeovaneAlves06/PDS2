@@ -26,7 +26,7 @@ public class MotoFacadeImpl implements MotoFacade {
 	public List<Moto> getMotos(@WebParam(name="codigoMoto") 
 							Integer codigo) {
 		Moto moto = new Moto();
-		moto.setCodMoto(codigo);
+		moto.setCodigo(codigo);
 		return motoDao.getMotos(moto);
 	}
 	
@@ -43,7 +43,7 @@ public class MotoFacadeImpl implements MotoFacade {
 	@WebMethod
 	public void deletarMoto(@WebParam(name="codigoMoto") Integer codigo) {
 		Moto moto = new Moto();
-		moto.setCodMoto(codigo);
+		moto.setCodigo(codigo);
 		motoDao.excluir(moto);
 	}
 

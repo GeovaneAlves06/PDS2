@@ -19,12 +19,12 @@ public class MotoDaoImpl implements MotoDao {
 	public List<Moto> getMotos(Moto moto) {
 		StringBuffer hql = new StringBuffer("from Moto c"
 				+ " where 1 = 1");		
-		if (moto.getCodMoto() != null) {
+		if (moto.getCodigo() != null) {
 			hql.append(" and c.codigo = :codigo");
 		}
 		Query query = entityManager.createQuery(hql.toString());
-		if (moto.getCodMoto() != null) {
-			query.setParameter("codigo",moto.getCodMoto());
+		if (moto.getCodigo() != null) {
+			query.setParameter("codigo",moto.getCodigo());
 		} 
 		return query.getResultList();
 	}

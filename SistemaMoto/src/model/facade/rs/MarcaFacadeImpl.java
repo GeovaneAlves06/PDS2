@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import model.dao.MarcaDao;
 import model.domain.Marca;
 
-@Path("/moto")
+@Path("/marca")
 @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class MarcaFacadeImpl implements MarcaFacade {
@@ -41,7 +41,7 @@ public class MarcaFacadeImpl implements MarcaFacade {
 	@Path("/{codigo}")
 	public List<Marca> getMarcas(@PathParam("codigo") Integer codigo) {
 		Marca marca= new Marca();
-		marca.setCodMarca(codigo);
+		marca.setCodigo(codigo);
 		return marcaDao.getMarcas(marca);
 	}
 	
@@ -72,7 +72,7 @@ public class MarcaFacadeImpl implements MarcaFacade {
 	@Path("/{codigo}")
 	public void deletarMarca(@PathParam("codigo") Integer codigo) {
 		Marca marca = new Marca();
-		marca.setCodMarca(codigo);
+		marca.setCodigo(codigo);
 		marcaDao.excluir(marca);
 	}
 

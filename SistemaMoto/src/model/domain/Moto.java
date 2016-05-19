@@ -4,6 +4,7 @@ package model.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Moto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CD_MOTO")
-	private Integer codMoto;
+	private Integer Codigo;
 	
 	@Column(name = "NM_MOTO")
 	private String nome;
@@ -48,12 +49,12 @@ public class Moto implements Serializable {
 		
 	}
 
-	public Integer getCodMoto() {
-		return codMoto;
+	public Integer getCodigo() {
+		return Codigo;
 	}
 
-	public void setCodMoto(Integer codMoto) {
-		this.codMoto = codMoto;
+	public void setCodigo(Integer codigo) {
+		this.Codigo = codigo;
 	}
 
 	public String getNome() {
@@ -101,7 +102,7 @@ public class Moto implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codMoto == null) ? 0 : codMoto.hashCode());
+		result = prime * result + ((Codigo == null) ? 0 : Codigo.hashCode());
 		return result;
 	}
 
@@ -114,10 +115,10 @@ public class Moto implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Moto other = (Moto) obj;
-		if (codMoto == null) {
-			if (other.codMoto != null)
+		if (Codigo == null) {
+			if (other.Codigo != null)
 				return false;
-		} else if (!codMoto.equals(other.codMoto))
+		} else if (!Codigo.equals(other.Codigo))
 			return false;
 		return true;
 	}

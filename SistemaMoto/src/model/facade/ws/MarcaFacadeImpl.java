@@ -27,7 +27,7 @@ public class MarcaFacadeImpl implements MarcaFacade {
 	public List<Marca> getMarcas(@WebParam(name="codigoMarca") 
 							Integer codigo) {
 		Marca marca = new Marca();
-		marca.setCodMarca(codigo);
+		marca.setCodigo(codigo);
 		return marcaDao.getMarcas(marca);
 	}
 	
@@ -44,7 +44,7 @@ public class MarcaFacadeImpl implements MarcaFacade {
 	@WebMethod
 	public void deletarMarca(@WebParam(name="codigoMarca") Integer codigo) {
 		Marca marca = new Marca();
-		marca.setCodMarca(codigo);
+		marca.setCodigo(codigo);
 		marcaDao.excluir(marca);
 	}
 

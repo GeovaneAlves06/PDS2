@@ -19,12 +19,12 @@ public class MarcaDaoImpl implements MarcaDao {
 	public List<Marca> getMarcas(Marca marca) {
 		StringBuffer hql = new StringBuffer("from marca c"
 				+ " where 1 = 1");		
-		if (marca.getCodMarca() != null) {
+		if (marca.getCodigo() != null) {
 			hql.append(" and c.codigo = :codigo");
 		}
 		Query query = entityManager.createQuery(hql.toString());
-		if (marca.getCodMarca() != null) {
-			query.setParameter("codigo",marca.getCodMarca());
+		if (marca.getCodigo() != null) {
+			query.setParameter("codigo",marca.getCodigo());
 		} 
 		return query.getResultList();
 	}
