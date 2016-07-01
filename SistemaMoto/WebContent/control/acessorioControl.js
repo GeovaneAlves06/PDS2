@@ -1,50 +1,70 @@
 var app = angular.module('acessorioModule',[]);
-app.controller('acessorioControl',function($scope,$http) {
 
-	var url = 'http://localhost:8180/SistemaMoto/rs/acessorio';
-
-		
+app.controller('acessorioControl',function($scope,$http){
+	var url = 'http://localhost:8180/SistemaMoto/rs/moto';
+	
 	$scope.pesquisar = function(){
-		
-		$http.get(url).success(function(acessoriosRetorno){
-			$scope.acessorios = acessoriosRetorno;
-		}).error(function(mensagemErro){
-			
-			alert(mensagemErro);	
-		});
-		
+		$http.get(url).success(function (motosRetorno) {
+			$scope.motos = motosRetorno;
+		}).error(function(mensagemErro) {
+			$scope.mensagens.push('Erro ao pesquisar Acessorios '+mensagemErro);
+		});   
 	}
-	
-	$scope.pesquisar();
-	
-	
 	
 	
 	$scope.novo = function(){
-		$scope.acessorio = "";
+		$scope.moto = {};
+		$scope.mensagens = [];
 	}
 	
-	$scope.salvar = function(){
-		$http.post(url).success(function(acessoriosRetorno){
-			$scope.acessorios.push(acessoriosRetorno);
-			$scope.novo();
-		}).error(function(mensagemErro){
-			alert(mensagemErro);	
+	$scope.montaMensagemErro = function(listaErro) {
+		$scope.mensagens = [];
+		$scope.mensagens.push('Falha de validação retornada do servidor');
+		angular.forEach(listaErro, function(value, key){
+			 $scope.mensagens.push(value.message);
 		});
-		
-		
 	}
-	$scope.seleciona = function(acessorioTabela){
-		$scope.acessorio=acessorioTabela;
+
+    $scope.salvar = function() {    	
+    	if ($scope.moto.codigo == undefined || $scope.moto.codigo == '') {    		
+			$http.post(url,$scope.moto).success(function(motoRetornado) {
+				$scope.motos.push(motoRetornado);
+				$scope.novo();
+				$scope.mensagens.push('Moto salva com sucesso');
+			}).error(function (erro) {
+				//$scope.mensagens.push('Erro ao salvar Moto: '+JSON.stringify(erro));
+				$scope.montaMensagemErro(erro.parameterViolations);
+			});
+		} else {
+			$http.put(url,$scope.moto).success(function(moto) {
+				$scope.pesquisar();
+				$scope.novo();
+				$scope.mensagens.push('Moto atualizada com sucesso');
+			}).error(function (erro) {
+				$scope.montaMensagemErro(erro.parameterViolations);
+			});
+		}		
 	}
 	
-	$scope.excluir = function(){
-		$scope.acessorios.splice($scope.acessorio.indexOf($scope.acessorio),1);
-		$scope.novo();
+	$scope.excluir = function() {
+		if ($scope.moto.codigo == '') {
+			alert('Selecione uma Moto');
+		} else {
+			urlExcluir = url+'/'+$scope.moto.codigo;
+			$http.delete(urlExcluir).success(function () {
+				$scope.pesquisar();
+				$scope.novo();
+				$scope.mensagens.push('Moto excluída com sucesso');
+			}).error(function (erro) {
+				$scope.mensagens.push('Erro ao excluir Moto: '+erro);
+			});
+		}
 	}
 	
-	$scope.pesquisar = function(){
-		
+	$scope.seleciona = function(motoTabela) {
+		$scope.moto = motoTabela;
 	}
 	
+	$scope.pesquisar();
+	$scope.novo();
 });

@@ -40,8 +40,15 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="cadastro">
-					
-						<form form-horizontal>
+     						<form  form-horizontal name="motoForm" class="css-form" ng-submit="motoForm.$valid && salvar()" novalidate>
+     						<br>
+						<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+						<div ng-show="motoForm.$submitted">
+						     <div ng-show="motoForm.nome.$error.required">Preencha o nome</div>
+	      				     <div ng-show="motoForm.ano.$error.required">Preencha o Ano</div>
+	      				     <div ng-show="motoForm.preco.$error.required">Preencha Preço</div>	      				     
+	    				</div>    				
+						<br>
 							<br>
 								<button type="button" ng-click="novo();" class="btn btn-info">Novo</button>
 								<button type="button" ng-click="salvar();" class="btn btn-success">Salvar</button>
@@ -51,33 +58,45 @@
 							<br>
 						
 							<div class="form-group">
-								<label for="exampleInputCodigo" class="col-sm-1 control-label">Código</label>
+								<label for="codigo" class="col-sm-1 control-label">Código</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" ng-model="moto.codigo" placeholder="Código">
+									<input type="number" disabled="true" class="form-control" ng-model="moto.codigo" name="codigo" placeholder="Código">
 								</div>
 								<br>
 								<br>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputNome" class="col-sm-1 control-label">Nome</label>
+								<label for="nome" class="col-sm-1 control-label">Nome</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" ng-model="moto.nome" placeholder="Nome">
+									<input type="text" class="form-control" ng-model="moto.nome" name="nome" placeholder="Nome" required/>
 								</div>
 								<br>
 							    <br>
-							</div>
+							</div>    
+						   <div class="form-group">
+								<label for="marca" class="col-sm-1 control-label" placeholder="Seleciona a Marca">Marca</label>
+								<div class="col-sm-5">
+								<select class="form-control" name="marca"
+			    					ng-model="motoMarcaSelecionado"
+									ng-options="moto.nome for moto in motos track by moto.nome"
+									ng-change="alteramarcasRetorno()" >
+								</select>
+							   </div>
+						    </div>	
+						    <br>
+							<br>   
 							<div class="form-group">
-								<label for="exampleInputCargo" class="col-sm-1 control-label">Ano</label>
+								<label for="ano" class="col-sm-1 control-label">Ano</label>
 								<div class="col-sm-1">
-									<input type="text" class="form-control" ng-model="moto.ano" placeholder="Ano">
+									<input type="text" class="form-control" ng-model="moto.ano" name="ano" placeholder="Ano">
 								</div>
 								<br>
 							   <br>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputEndereco" class="col-sm-1 control-label">Preço</label>
+								<label for="preco" class="col-sm-1 control-label">Preço</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" ng-model="moto.preco" placeholder="Preço">
+									<input type="text" class="form-control" ng-model="moto.preco" name="preco" placeholder="Preço">
 								</div>
 							</div>
 								
@@ -93,12 +112,14 @@
 						<table class="table table-hover">
 							<th>Código:</th>
 							<th>Nome:</th>
+							<th>Marca:</th>
 							<th>Ano:</th>
 							<th>Preco:</th>
 							
 			    		<tr ng-repeat="motoTabela in motos | filter:criterio" ng-click="seleciona(motoTabela);">
 								<td>{{motoTabela.codigo}}</td>
 								<td>{{motoTabela.nome}}</td>
+								<td>{{motoTabela.marca}}</td>
 								<td>{{motoTabela.ano}}</td>
 								<td>{{motoTabela.preco}}</td>
 							</tr>
